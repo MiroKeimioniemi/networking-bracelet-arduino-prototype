@@ -21,6 +21,7 @@ void setup() {
 
 void loop() {
   connectToPeripheral();
+  delay(500);
 }
 
 void connectToPeripheral(){
@@ -63,8 +64,8 @@ void controlPeripheral(BLEDevice peripheral) {
   Serial.println("- Discovering peripheral device attributes...");
   if (peripheral.discoverAttributes()) {
     Serial.println("* Peripheral device attributes discovered!");
-    Serial.println(" ");
-    Serial.println(BLE.rssi());
+    Serial.print("RSSI: ");
+    Serial.println(peripheral.rssi());
     Serial.println(" ");
   } else {
     Serial.println("* Peripheral device attributes discovery failed!");
@@ -73,6 +74,29 @@ void controlPeripheral(BLEDevice peripheral) {
     return;
   }
 
+  // Read matchCharacteristic value
+  BLEService service = peripheral.service(deviceServiceUuid);
+  BLECharacteristic matchCharacteristic = service.characteristic(deviceServiceCharacteristicUuid);
+  matchCharacteristic.read();
+  int value = readData(matchCharacteristic.value(), matchCharacteristic.valueLength());
+  Serial.print("Characteristic value: ");
+  Serial.println(value);
+
   Serial.println("- Peripheral device disconnected!");
+}
+
+
+
+
+int readData(const unsigned char data[], int length) {
+  for (int i = 0; i < length; i++) {
+    unsigned char b = data[i];
+
+    if (b < 16) {
+      Serial.print("0");
+    }
+
+    return (int)b;
+  }
 }
   

@@ -3,10 +3,10 @@
 const char* deviceServiceUuid = "19b10000-e8f2-537e-4f6c-d104768a1214";
 const char* deviceServiceCharacteristicUuid = "19b10001-e8f2-537e-4f6c-d104768a1214";
 
-int gesture = -1;
+int match = -1;
 
-BLEService gestureService(deviceServiceUuid); 
-BLEByteCharacteristic gestureCharacteristic(deviceServiceCharacteristicUuid, BLERead | BLEWrite);
+BLEService matchService(deviceServiceUuid); 
+BLEByteCharacteristic matchCharacteristic(deviceServiceCharacteristicUuid, BLERead | BLEWrite);
 
 
 void setup() {
@@ -19,10 +19,10 @@ void setup() {
   }
 
   BLE.setLocalName("Arduino Nano 33 BLE (Peripheral)");
-  BLE.setAdvertisedService(gestureService);
-  gestureService.addCharacteristic(gestureCharacteristic);
-  BLE.addService(gestureService);
-  gestureCharacteristic.writeValue(-1);
+  BLE.setAdvertisedService(matchService);
+  matchService.addCharacteristic(matchCharacteristic);
+  BLE.addService(matchService);
+  matchCharacteristic.writeValue(123);
   BLE.advertise();
 
   Serial.println("Nano 33 BLE (Peripheral Device)");
@@ -31,20 +31,22 @@ void setup() {
 
 void loop() {
   BLEDevice central = BLE.central();
+
   Serial.println("- Discovering central device...");
   delay(500);
 
   if (central) {
     Serial.println("* Connected to central device!");
-    Serial.print("* Device MAC address: ");
+    Serial.print("* Central MAC address: ");
     Serial.println(central.address());
+    Serial.print("* Central RSSI: ");
+    Serial.println(central.rssi());
     Serial.println(" ");
-    Serial.println(BLE.rssi());
-    Serial.println(" ");
+    Serial.println(matchCharacteristic.value());
 
     while (central.connected()) {
-      if (gestureCharacteristic.written()) {
-         gesture = gestureCharacteristic.value();
+      if (matchCharacteristic.written()) {
+         match = matchCharacteristic.value();
         
        }
     }
