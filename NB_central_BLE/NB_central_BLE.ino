@@ -1,21 +1,11 @@
 #include <ArduinoBLE.h>
-#include <Arduino_APDS9960.h>
 
 const char* deviceServiceUuid = "19b10000-e8f2-537e-4f6c-d104768a1214";
 const char* deviceServiceCharacteristicUuid = "19b10001-e8f2-537e-4f6c-d104768a1214";
 
-int gesture = -1;
-int oldGestureValue = -1;   
-
 void setup() {
   Serial.begin(9600);
   while (!Serial);
-  
-  if (!APDS.begin()) {
-    Serial.println("* Error initializing APDS9960 sensor!");
-  } 
-
-  APDS.setGestureSensitivity(80); 
   
   if (!BLE.begin()) {
     Serial.println("* Starting Bluetooth® Low Energy module failed!");
@@ -25,7 +15,7 @@ void setup() {
   BLE.setLocalName("Nano 33 BLE (Central)"); 
   BLE.advertise();
 
-  Serial.println("Arduino Nano 33 BLE Sense (Central Device)");
+  Serial.println("Arduino Nano 33 BLE (Central Device)");
   Serial.println(" ");
 }
 
@@ -73,6 +63,8 @@ void controlPeripheral(BLEDevice peripheral) {
   Serial.println("- Discovering peripheral device attributes...");
   if (peripheral.discoverAttributes()) {
     Serial.println("* Peripheral device attributes discovered!");
+    Serial.println(" ");
+    Serial.println(BLE.rssi());
     Serial.println(" ");
   } else {
     Serial.println("* Peripheral device attributes discovery failed!");
