@@ -5,7 +5,6 @@ const char* deviceServiceCharacteristicUuid = "19b10001-e8f2-537e-4f6c-d104768a1
 
 void setup() {
   Serial.begin(9600);
-  while (!Serial);
   
   if (!BLE.begin()) {
     Serial.println("* Starting Bluetooth® Low Energy module failed!");

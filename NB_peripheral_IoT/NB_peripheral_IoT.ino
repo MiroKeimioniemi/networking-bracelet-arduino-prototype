@@ -11,7 +11,6 @@ BLEByteCharacteristic matchCharacteristic(deviceServiceCharacteristicUuid, BLERe
 
 void setup() {
   Serial.begin(9600);
-  while (!Serial);  
   
   if (!BLE.begin()) {
     Serial.println("- Starting Bluetooth® Low Energy module failed!");
