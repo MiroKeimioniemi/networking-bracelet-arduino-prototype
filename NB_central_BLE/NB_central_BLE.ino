@@ -1,7 +1,9 @@
 #include <ArduinoBLE.h>
 
 const char* deviceServiceUuid = "19b10000-e8f2-537e-4f6c-d104768a1214";
-const char* deviceServiceCharacteristicUuid = "19b10001-e8f2-537e-4f6c-d104768a1214";
+const char* deviceIDCharacteristicUuid = "19b10001-e8f2-537e-4f6c-d104768a1214";
+const char* thisIDCharacteristicUuid = "19b10001-e8f2-537e-4f6c-d104768a1215";
+const char* deviceMatchCharacteristicUuid = "19b10001-e8f2-537e-4f6c-d104768a1216";
 
 void setup() {
   Serial.begin(9600);
@@ -73,13 +75,22 @@ void controlPeripheral(BLEDevice peripheral) {
     return;
   }
 
-  // Read matchCharacteristic value
   BLEService service = peripheral.service(deviceServiceUuid);
-  BLECharacteristic matchCharacteristic = service.characteristic(deviceServiceCharacteristicUuid);
+
+  // Read IDCharacteristic value
+  BLECharacteristic IDCharacteristic = service.characteristic(deviceIDCharacteristicUuid);
+  IDCharacteristic.read();
+  int peripheralID = readData(IDCharacteristic.value(), IDCharacteristic.valueLength());
+
+  // Read matchCharacteristic value
+  BLECharacteristic matchCharacteristic = service.characteristic(deviceMatchCharacteristicUuid);
   matchCharacteristic.read();
-  int value = readData(matchCharacteristic.value(), matchCharacteristic.valueLength());
-  Serial.print("Characteristic value: ");
-  Serial.println(value);
+  int matching = readData(matchCharacteristic.value(), matchCharacteristic.valueLength());
+
+  Serial.print("Peripheral ID: ");
+  Serial.println(peripheralID);
+  Serial.print("Matching: ");
+  Serial.println(matching);
 
   Serial.println("- Peripheral device disconnected!");
 }
