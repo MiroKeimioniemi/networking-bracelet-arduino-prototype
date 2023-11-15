@@ -5,6 +5,7 @@ const char* deviceOwnIDCharacteristicUuid = "19b10001-e8f2-537e-4f6c-d104768a121
 const char* deviceConnectedIDCharacteristicUuid = "19b10001-e8f2-537e-4f6c-d104768a1215";
 const char* deviceMatchCharacteristicUuid = "19b10001-e8f2-537e-4f6c-d104768a1216";
 
+int id = 111;
 int match = -1;
 
 BLEService matchService(deviceServiceUuid); 
@@ -29,7 +30,7 @@ void setup() {
   matchService.addCharacteristic(matchCharacteristic);
   BLE.addService(matchService);
 
-  ownIDCharacteristic.writeValue(123);
+  ownIDCharacteristic.writeValue(id);
   connectedIDCharacteristic.writeValue(0);
   matchCharacteristic.writeValue(false);
 

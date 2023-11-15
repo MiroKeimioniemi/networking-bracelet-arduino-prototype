@@ -2,8 +2,10 @@
 
 const char* deviceServiceUuid = "19b10000-e8f2-537e-4f6c-d104768a1214";
 const char* deviceIDCharacteristicUuid = "19b10001-e8f2-537e-4f6c-d104768a1214";
-const char* thisIDCharacteristicUuid = "19b10001-e8f2-537e-4f6c-d104768a1215";
+const char* inputIDCharacteristicUuid = "19b10001-e8f2-537e-4f6c-d104768a1215";
 const char* deviceMatchCharacteristicUuid = "19b10001-e8f2-537e-4f6c-d104768a1216";
+
+int id = 222;
 
 void setup() {
   Serial.begin(9600);
@@ -82,6 +84,12 @@ void controlPeripheral(BLEDevice peripheral) {
   IDCharacteristic.read();
   int peripheralID = readData(IDCharacteristic.value(), IDCharacteristic.valueLength());
 
+  // Write inputIDCharacteristic value
+  BLECharacteristic inputIDCharacteristic = service.characteristic(inputIDCharacteristicUuid);
+  inputIDCharacteristic.writeValue((byte)id);
+  IDCharacteristic.read();
+  int inputID = readData(inputIDCharacteristic.value(), inputIDCharacteristic.valueLength());
+
   // Read matchCharacteristic value
   BLECharacteristic matchCharacteristic = service.characteristic(deviceMatchCharacteristicUuid);
   matchCharacteristic.read();
@@ -89,12 +97,13 @@ void controlPeripheral(BLEDevice peripheral) {
 
   Serial.print("Peripheral ID: ");
   Serial.println(peripheralID);
+  Serial.print("This ID: ");
+  Serial.println(inputID);
   Serial.print("Matching: ");
   Serial.println(matching);
 
   Serial.println("- Peripheral device disconnected!");
 }
-
 
 
 
