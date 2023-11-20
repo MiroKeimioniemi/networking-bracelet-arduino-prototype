@@ -9,8 +9,8 @@ int id = 111;
 int match = -1;
 
 BLEService matchService(deviceServiceUuid); 
-BLEByteCharacteristic ownIDCharacteristic(deviceOwnIDCharacteristicUuid, BLERead | BLEWrite);
-BLEByteCharacteristic connectedIDCharacteristic(deviceConnectedIDCharacteristicUuid, BLERead | BLEWrite);
+BLEIntCharacteristic ownIDCharacteristic(deviceOwnIDCharacteristicUuid, BLERead | BLEWrite);
+BLEIntCharacteristic connectedIDCharacteristic(deviceConnectedIDCharacteristicUuid, BLERead | BLEWrite);
 BLEBooleanCharacteristic matchCharacteristic(deviceMatchCharacteristicUuid, BLERead | BLEWrite);
 
 
