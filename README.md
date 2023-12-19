@@ -113,9 +113,9 @@ more deeply connected world.
 
 [1] H. Dombovari, “The importance of networking and creating social capital,” Bachelor of Business
 Administration, South-Eastern Finland University of Applied Sciences, 2022. Accessed: Oct. 27,
-2023. [Online]. Available: [https://www.theseus.fi/bitstream/handle/10024/748826/Dombovari_Henrik.pdf?sequence=2](https://www.theseus.fi/bitstream/handle/10024/748826/Dombovari_Henrik.pdf?sequence=2)\
+2023. [Online]. Available: [https://www.theseus.fi/bitstream/handle/10024/748826/Dombovari_Henrik.pdf?sequence=2](https://www.theseus.fi/bitstream/handle/10024/748826/Dombovari_Henrik.pdf?sequence=2)  \
 [2] “Bluetooth Technology Overview,” Bluetooth® Technology Website. Accessed: Nov. 05, 2023.
-[Online]. Available: [https://www.bluetooth.com/learn-about-bluetooth/tech-overview/](https://www.bluetooth.com/learn-about-bluetooth/tech-overview/)\
+[Online]. Available: [https://www.bluetooth.com/learn-about-bluetooth/tech-overview/](https://www.bluetooth.com/learn-about-bluetooth/tech-overview/)  \
 [3] M. Keimiöniemi, A. Akbar, and N. Nordström, “Networking Bracelet Design Document,” Nov. 09,
 2023.
 
